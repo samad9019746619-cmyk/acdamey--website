@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal | The Neo Global Educational Academy</title>
+  <link rel="icon" type="image/jpeg" href="images/logo.jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --emerald-dark: #022c22;
+      --emerald-main: #064e3b;
+      --emerald-light: #047857;
+      --gold-main: #d4af37;
+      --gold-light: #fde047;
+      --bg-slate: #f8fafc;
+      --card-bg: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-slate);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .admin-header {
+      background: var(--emerald-dark);
+      color: #ffffff;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold-main);
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-main);
+    }
+    .brand-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: 'Playfair Display', serif;
+    }
+    .brand-title span {
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1300px;
+      width: 100%;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    /* Login Screen */
+    .login-box {
+      max-width: 420px;
+      margin: 80px auto;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+    .login-box h2 {
+      font-size: 1.5rem;
+      color: var(--emerald-dark);
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+    }
+    .login-box p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 25px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 13px 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.3s;
+    }
+    .input-field:focus {
+      border-color: var(--gold-main);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+    }
+    .btn-gold {
+      background: var(--gold-main);
+      color: var(--emerald-dark);
+      width: 100%;
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-dark);
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+    .btn-emerald {
+      background: var(--emerald-main);
+      color: #ffffff;
+    }
+    .btn-emerald:hover {
+      background: var(--emerald-light);
+    }
+
+    /* Dashboard Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .metric-card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .metric-card span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .metric-card h3 {
+      font-size: 2.2rem;
+      color: var(--emerald-dark);
+      margin-top: 6px;
+      font-weight: 800;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 12px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      outline: none;
+      font-size: 0.92rem;
+    }
+    .filter-select {
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      outline: none;
+      font-size: 0.92rem;
+      background: #ffffff;
+    }
+
+    /* Table */
+    .table-responsive {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    thead {
+      background: #f1f5f9;
+      color: var(--text-dark);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    th, td {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-Pending { background: #fef3c7; color: #92400e; }
+    .badge-Review { background: #e0f2fe; color: #0369a1; }
+    .badge-Approved { background: #dcfce7; color: #15803d; }
+    .badge-Enrolled { background: #f3e8ff; color: #6b21a8; }
+    .badge-Rejected { background: #fee2e2; color: #b91c1c; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 2000;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #ffffff;
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .detail-item {
+      background: #f8fafc;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .detail-item label {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .detail-item span {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .status-select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--emerald-dark);
+      color: #94a3b8;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="brand-wrap">
+      <img src="images/logo.jpeg" alt="Academy Logo" class="brand-logo">
+      <div class="brand-title">
+        <h1>The Neo Global Educational Academy</h1>
+        <span>Admin Application Management Portal</span>
+      </div>
+    </div>
+    <div id="authActions" style="display:none;">
+      <span id="adminUserDisplay" style="color:var(--gold-light); font-size:0.85rem; margin-right:15px; font-weight:600;"></span>
+      <button class="btn btn-outline" style="color:#ffffff; border-color:rgba(255,255,255,0.3); padding:6px 14px; font-size:0.82rem;" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Login View -->
+  <div id="loginView" class="container">
+    <div class="login-box">
+      <img src="images/logo.jpeg" alt="Logo" style="width:60px; height:60px; border-radius:50%; margin:0 auto 15px; border:2px solid var(--gold-main);">
+      <h2>Staff Authentication</h2>
+      <p>Enter your authorized credentials to access student admission applications.</p>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <input type="text" id="username" class="input-field" placeholder="Username (Default: admin)" required>
+        <input type="password" id="password" class="input-field" placeholder="Password (Default: NeoAcademy@2025)" required>
+        <button type="submit" class="btn btn-gold" id="loginBtn">Secure Log In</button>
+        <div id="loginError" style="color:#ef4444; font-size:0.85rem; margin-top:12px; display:none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard View -->
+  <div id="dashboardView" class="container" style="display:none;">
+    
+    <!-- Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <span>Total Applications</span>
+        <h3 id="statTotal">0</h3>
+      </div>
+      <div class="metric-card">
+        <span>Pending Review</span>
+        <h3 id="statPending" style="color:#d97706;">0</h3>
+      </div>
+      <div class="metric-card">
+        <span>Approved Candidates</span>
+        <h3 id="statApproved" style="color:#16a34a;">0</h3>
+      </div>
+      <div class="metric-card">
+        <span>Enrolled Students</span>
+        <h3 id="statEnrolled" style="color:#9333ea;">0</h3>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search student name, ref number, or mobile..." oninput="debounceSearch()">
+      
+      <select id="courseFilter" class="filter-select" onchange="fetchApplications()">
+        <option value="">All Academic Programs</option>
+        <option value="inter-mpc">Intermediate MPC</option>
+        <option value="inter-bipc">Intermediate BiPC</option>
+        <option value="inter-cec">Intermediate CEC</option>
+        <option value="inter-hec">Intermediate HEC</option>
+        <option value="neet-prep">NEET Preparation</option>
+        <option value="iit-jee-prep">IIT-JEE Preparation</option>
+        <option value="degree-bcom-gen">B.Com General</option>
+        <option value="degree-bcom-ca">B.Com Computer Applications</option>
+        <option value="degree-bba">BBA</option>
+        <option value="hifz-academy">Hifz Academy</option>
+        <option value="voc-mlt">Vocational MLT</option>
+        <option value="placement-cell">Placement Assistance</option>
+      </select>
+
+      <select id="statusFilter" class="filter-select" onchange="fetchApplications()">
+        <option value="">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Under Review">Under Review</option>
+        <option value="Approved">Approved</option>
+        <option value="Enrolled">Enrolled</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+
+      <button class="btn btn-emerald" onclick="exportCSV()">Export CSV</button>
+      <button class="btn btn-outline" onclick="fetchApplications()">Refresh</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Reference No</th>
+            <th>Date</th>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Batch</th>
+            <th>Contact Mobile</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="applicationsTableBody">
+          <tr>
+            <td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">Loading admission applications...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" class="modal-backdrop">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h3 style="font-size:1.4rem; color:var(--emerald-dark); margin-bottom:5px;" id="modalStudentName">Student Application Details</h3>
+      <span style="font-size:0.85rem; color:var(--gold-main); font-weight:700;" id="modalRefNo">Ref: TNGA-2025-XXXX</span>
+
+      <div class="detail-grid">
+        <div class="detail-item"><label>Program Applied</label><span id="mCourse"></span></div>
+        <div class="detail-item"><label>Preferred Batch</label><span id="mBatch"></span></div>
+        <div class="detail-item"><label>Date of Birth</label><span id="mDob"></span></div>
+        <div class="detail-item"><label>Gender</label><span id="mGender"></span></div>
+        <div class="detail-item"><label>Student Mobile</label><span id="mMobile"></span></div>
+        <div class="detail-item"><label>Student Email</label><span id="mEmail"></span></div>
+        <div class="detail-item"><label>Father / Guardian Name</label><span id="mFather"></span></div>
+        <div class="detail-item"><label>Father Contact</label><span id="mFatherMobile"></span></div>
+        <div class="detail-item"><label>Mother Name</label><span id="mMother"></span></div>
+        <div class="detail-item"><label>Last Qualification</label><span id="mQual"></span></div>
+        <div class="detail-item"><label>Previous Institution</label><span id="mPrevSchool"></span></div>
+        <div class="detail-item"><label>Marks / GPA</label><span id="mMarks"></span></div>
+        <div class="detail-item" style="grid-column: span 2;"><label>Residential Address</label><span id="mAddress"></span></div>
+        <div class="detail-item"><label>Documents Indicated</label><span id="mDocs"></span></div>
+        <div class="detail-item"><label>Course-Specific Notes</label><span id="mNotes"></span></div>
+      </div>
+
+      <div style="background:#f1f5f9; padding:20px; border-radius:12px; margin-top:15px;">
+        <label style="font-size:0.82rem; font-weight:700; color:var(--emerald-dark); text-transform:uppercase;">Update Application Status</label>
+        <select id="updateStatusSelect" class="status-select">
+          <option value="Pending">Pending</option>
+          <option value="Under Review">Under Review</option>
+          <option value="Approved">Approved</option>
+          <option value="Enrolled">Enrolled</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+        
+        <label style="font-size:0.82rem; font-weight:700; color:var(--emerald-dark); text-transform:uppercase; margin-top:10px; display:block;">Counselor Admin Notes</label>
+        <textarea id="updateAdminNotes" class="input-field" rows="2" style="margin-top:5px;" placeholder="Add remarks about student interaction..."></textarea>
+
+        <button class="btn btn-gold" style="margin-top:10px;" onclick="saveStatus()">Save Updates</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year"></span> The Neo Global Educational Academy. Hyderabad. Official Admin Portal.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const API_BASE = window.location.origin;
+    let currentAppId = null;
+    let debounceTimer = null;
+
+    // Check existing auth
+    window.addEventListener('DOMContentLoaded', () => {
+      const token = sessionStorage.getItem('neo_admin_token');
+      if (token) {
+        showDashboard();
+      } else {
+        document.getElementById('loginView').style.display = 'block';
+      }
+    });
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      const errBox = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
+      
+      errBox.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        const data = await res.json();
+        if (res.ok && data.access_token) {
+          sessionStorage.setItem('neo_admin_token', data.access_token);
+          sessionStorage.setItem('neo_admin_user', data.username);
+          showDashboard();
+        } else {
+          errBox.textContent = data.detail || 'Invalid username or password.';
+          errBox.style.display = 'block';
+        }
+      } catch (err) {
+        // Fallback for static testing if backend is offline
+        if (u === 'admin' && p === 'NeoAcademy@2025') {
+          sessionStorage.setItem('neo_admin_token', 'mock_jwt_token_for_offline_session');
+          sessionStorage.setItem('neo_admin_user', 'admin');
+          showDashboard();
+        } else {
+          errBox.textContent = 'Unable to connect to backend server. Make sure FastAPI server is running on port 8000.';
+          errBox.style.display = 'block';
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Secure Log In';
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('loginView').style.display = 'none';
+      document.getElementById('dashboardView').style.display = 'block';
+      document.getElementById('authActions').style.display = 'flex';
+      document.getElementById('adminUserDisplay').textContent = 'Staff: ' + (sessionStorage.getItem('neo_admin_user') || 'Admin');
+      fetchApplications();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('neo_admin_token');
+      sessionStorage.removeItem('neo_admin_user');
+      window.location.reload();
+    }
+
+    function debounceSearch() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(fetchApplications, 300);
+    }
+
+    async function fetchApplications() {
+      const token = sessionStorage.getItem('neo_admin_token');
+      const search = document.getElementById('searchInput').value.trim();
+      const course = document.getElementById('courseFilter').value;
+      const stat = document.getElementById('statusFilter').value;
+
+      let url = `/api/admin/applications?skip=0&limit=100`;
+      if (search) url += `&search=${encodeURIComponent(search)}`;
+      if (course) url += `&course_id=${encodeURIComponent(course)}`;
+      if (stat) url += `&status_filter=${encodeURIComponent(stat)}`;
+
+      try {
+        const res = await fetch(url, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.status === 401) { logout(); return; }
+        const data = await res.json();
+
+        // Update metrics
+        document.getElementById('statTotal').textContent = data.total || 0;
+        document.getElementById('statPending').textContent = data.pending || 0;
+        document.getElementById('statApproved').textContent = data.approved || 0;
+        document.getElementById('statEnrolled').textContent = data.enrolled || 0;
+
+        renderTable(data.items || []);
+      } catch (e) {
+        // If API is unreachable, check localStorage fallback
+        renderOfflineRecords();
+      }
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('applicationsTableBody');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No admission applications found matching your criteria.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(app => `
+        <tr>
+          <td><strong style="color:var(--emerald-main);">${app.reference_no}</strong></td>
+          <td>${app.application_date || '—'}</td>
+          <td><strong>${app.full_name}</strong></td>
+          <td>${app.course_name}</td>
+          <td>${app.preferred_batch || 'General'}</td>
+          <td><a href="tel:${app.student_mobile}" style="color:var(--emerald-dark); font-weight:600;">${app.student_mobile}</a></td>
+          <td><span class="badge badge-${app.status.replace(/\s+/g, '')}">${app.status}</span></td>
+          <td>
+            <button class="btn btn-outline" style="padding:6px 12px; font-size:0.8rem;" onclick="viewDetail(${app.id || 0}, '${encodeURIComponent(JSON.stringify(app))}')">Review</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderOfflineRecords() {
+      const tbody = document.getElementById('applicationsTableBody');
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">Backend server running locally or offline. Submit an application from the home page to test.</td></tr>`;
+    }
+
+    function viewDetail(id, encodedApp) {
+      const app = JSON.parse(decodeURIComponent(encodedApp));
+      currentAppId = app.id;
+
+      document.getElementById('modalStudentName').textContent = app.full_name;
+      document.getElementById('modalRefNo').textContent = 'Ref: ' + app.reference_no;
+      document.getElementById('mCourse').textContent = app.course_name;
+      document.getElementById('mBatch').textContent = app.preferred_batch || 'General';
+      document.getElementById('mDob').textContent = app.dob || '—';
+      document.getElementById('mGender').textContent = app.gender || '—';
+      document.getElementById('mMobile').textContent = app.student_mobile || '—';
+      document.getElementById('mEmail').textContent = app.email || '—';
+      document.getElementById('mFather').textContent = app.father_name || '—';
+      document.getElementById('mFatherMobile').textContent = app.father_mobile || '—';
+      document.getElementById('mMother').textContent = app.mother_name || '—';
+      document.getElementById('mQual').textContent = app.last_qualification || '—';
+      document.getElementById('mPrevSchool').textContent = app.prev_institution || '—';
+      document.getElementById('mMarks').textContent = app.prev_marks_grade || '—';
+      document.getElementById('mAddress').textContent = `${app.address}, ${app.city}, ${app.state} - ${app.pincode}`;
+      
+      const docs = [];
+      if (app.aadhaar_available) docs.push('Aadhaar Card');
+      if (app.birth_cert_available) docs.push('Birth Certificate');
+      if (app.marks_memo_available) docs.push('Marks Memo');
+      document.getElementById('mDocs').textContent = docs.length ? docs.join(', ') : 'None marked available';
+      document.getElementById('mNotes').textContent = app.course_specific_data || '—';
+
+      document.getElementById('updateStatusSelect').value = app.status;
+      document.getElementById('updateAdminNotes').value = app.admin_notes || '';
+
+      document.getElementById('detailModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+
+    async function saveStatus() {
+      if (!currentAppId) { closeModal(); return; }
+      const token = sessionStorage.getItem('neo_admin_token');
+      const newStatus = document.getElementById('updateStatusSelect').value;
+      const notes = document.getElementById('updateAdminNotes').value;
+
+      try {
+        const res = await fetch(`/api/admin/applications/${currentAppId}/status`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ status: newStatus, admin_notes: notes })
+        });
+        if (res.ok) {
+          closeModal();
+          fetchApplications();
+        } else {
+          alert('Failed to update status.');
+        }
+      } catch (e) {
+        alert('Server unreachable. Status change simulated.');
+        closeModal();
+      }
+    }
+
+    function exportCSV() {
+      const token = sessionStorage.getItem('neo_admin_token');
+      window.open(`/api/admin/export?token=${token}`, '_blank');
+    }
+  </script>
+
+<!-- Footer -->
+<footer style="background:#011d17;color:#94a3b8;text-align:center;padding:16px;font-size:.82rem;border-top:1px solid rgba(212,175,55,.2);">
+  &copy; <script>document.write(new Date().getFullYear())</script> The Neo Global Educational Academy, Hyderabad &mdash; Developed by <strong style="color:#d4af37;">Mohammed Abdul Samad</strong>
+</footer>
+</body>
+</html>

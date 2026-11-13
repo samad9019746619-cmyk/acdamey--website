@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Website QR Code | The Neo Global Educational Academy</title>
+  <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald-dark: #022c22;
+      --emerald-deep: #064e3b;
+      --gold-main: #d4af37;
+      --gold-light: #fde047;
+      --bg-cream: #faf9f6;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:var(--bg-cream);color:#0f172a;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+    .print-card{background:#ffffff;border:3px solid var(--gold-main);border-radius:24px;box-shadow:0 20px 50px rgba(2,44,34,.15);max-width:500px;width:100%;padding:45px 35px;position:relative}
+    .badge{display:inline-block;background:rgba(212,175,55,.15);color:var(--emerald-dark);font-size:.78rem;font-weight:800;padding:6px 16px;border-radius:50px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:15px;border:1px solid var(--gold-main)}
+    h1{font-family:'Playfair Display',serif;color:var(--emerald-dark);font-size:1.75rem;margin-bottom:8px}
+    p.subtitle{color:#64748b;font-size:.92rem;margin-bottom:30px}
+    .qr-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:16px;padding:25px;display:inline-block;margin-bottom:25px}
+    .qr-box img{width:220px;height:220px;display:block;margin:0 auto;border-radius:8px}
+    .url-text{background:#022c22;color:var(--gold-light);padding:10px 16px;border-radius:8px;font-size:.9rem;font-weight:700;word-break:break-all;margin-bottom:25px}
+    .btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-weight:700;font-size:.92rem;border:none;cursor:pointer;text-decoration:none;transition:.2s}
+    .btn-gold{background:var(--gold-main);color:var(--emerald-dark)}
+    .btn-gold:hover{background:var(--gold-light)}
+    .btn-emerald{background:var(--emerald-dark);color:#ffffff}
+    .btn-emerald:hover{background:var(--emerald-deep)}
+    .footer-note{margin-top:35px;font-size:.8rem;color:#64748b;border-top:1px solid #e2e8f0;padding-top:20px}
+    @media print {
+      body { background: #fff; padding: 0; }
+      .print-card { border: 2px solid #000; box-shadow: none; padding: 20px; }
+      .btn-group { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-card">
+    <div class="badge">Official QR Code Portal</div>
+    <h1>The Neo Global Educational Academy</h1>
+    <p class="subtitle">Hyderabad, Telangana &bull; Sponsored by Millat Foundation</p>
+
+    <div class="qr-box">
+      <img src="images/site-qr.png" alt="Academy Website QR Code">
+    </div>
+
+    <div class="url-text" id="displayUrl">https://neo-global-academy.org</div>
+
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="window.print()">🖨️ Print QR Card</button>
+      <a href="images/site-qr.png" download="neo-global-academy-qr.png" class="btn btn-emerald">⬇ Download QR Image</a>
+      <a href="index.html" class="btn" style="background:#e2e8f0;color:#0f172a;">← Back to Home</a>
+    </div>
+
+    <div class="footer-note">
+      &copy; <span id="yr"></span> The Neo Global Educational Academy &bull; Developed by <strong style="color:var(--gold-main);">Mohammed Abdul Samad</strong>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const currentUrl = window.location.origin + window.location.pathname.replace('print.html', '');
+    document.getElementById('displayUrl').textContent = currentUrl;
+  </script>
+</body>
+</html>
